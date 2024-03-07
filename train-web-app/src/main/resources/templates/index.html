@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Train Information Consumer</title>
+	<style>
+		/* Add your CSS styles here */
+	</style>
+</head>
+
+<body>
+	<h1>Train Information</h1>
+	<form action="#" th:action="@{/train}" th:object="${trainIdForm}" method="get">
+		<label for="trainId">Enter Train ID:</label>
+		<input type="text" id="trainId" name="trainId">
+		<button type="submit">Get Train Information</button>
+	</form>
+
+	<div th:if="${trainInfo}">
+		<h2>Train Details</h2>
+		<p th:text="'Train Number: ' + ${trainInfo.train.trainNumber}"></p>
+		<p th:text="'Train Name: ' + ${trainInfo.train.trainName}"></p>
+		<h3>Stations:</h3>
+		<ul>
+			<li th:each="station : ${trainInfo.stations}" th:text="${station.stationName}"></li>
+		</ul>
+	</div>
+	
+	<div th:if="${error}">
+	    <p th:text="${error}" style="color: red;"></p>
+	</div>
+</body>
+
+</html>
